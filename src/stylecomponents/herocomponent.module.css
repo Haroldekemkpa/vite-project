@@ -1,0 +1,77 @@
+:root {
+  --bg-one: #0f172a;
+  --accent-one: #3b82f6;
+  --light-one: #f8fafc;
+  --cool-grey: #64748b; /* ✅ */
+  --highlight: #10b981; /* ✅*/
+
+  /* two */
+
+  --clean-white: #ffffff;
+  --charcoal-black: #111827; /* ✅*/
+  --accent-two: #2563eb;
+  --highlight-two: #f59e0b; /*Warm gold (for emphasis or icons)*/
+  --border: #e5e7eb; /*Light gray*/
+
+  /* three */
+
+  --bg-two: #1f1f1f; /*Off-black*/
+  --color-primary: #e11d48; /*Strong pink-red (highlight, CTA)*/
+  --color-secondary: #14b8a6; /*Teal green (skills, tags)*/
+  --color-neutral: #f3f4f6; /*Light gray*/
+  --text: #e5e7eb; /*Light text on dark bg*/
+
+  /* four */
+  --bg-three: #1e293b; /*Navy Slate – trust & professionalism*/
+  --accent-three: #22d3ee; /*Sky Cyan – innovation, modernity*/
+  --button: #f97316; /*Vibrant Orange – business energy*/
+  --bg-four: #f9fafb; /*Very light gray*/
+  --text-two: #0f172a; /*Rich dark gray*/
+
+  --tech-blue: #3b82f6;
+}
+
+.hero {
+  background-image: linear-gradient(
+      to right,
+      rgb(31, 41, 55, 0.3),
+      rgb(31, 41, 55, 0.3)
+    ),
+    url("../assets/hero-bg.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.heroText {
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* herocomponent.module.css */
+
+@keyframes slideUpFade {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.heroText {
+  animation: slideUpFade 0.8s ease-out both;
+  animation-delay: 0.5s;
+}
+
+.heroTextDelay1 {
+  animation: slideUpFade 0.8s ease-out both;
+}
+
+.heroTextDelay2 {
+  animation: slideUpFade 0.8s ease-out both;
+  animation-delay: 0.5s;
+}
+
