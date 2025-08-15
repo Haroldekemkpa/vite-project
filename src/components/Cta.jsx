@@ -1,5 +1,5 @@
 import React from "react";
-import HireSection from "./Hireme";
+import HireSection from "./HireMe";
 import Comment from "./Comment";
 
 const TestCta = () => {
