@@ -54,7 +54,7 @@ const TestimonialCarousel = () => {
                   <img
                     src={
                       cur.profile_img
-                        ? `http://localhost:3000/uploads/${cur.profile_img}`
+                        ? ` https://server-5-oy95.onrender.com/uploads/${cur.profile_img}`
                         : `${assets.img}`
                     }
                     alt={cur.name}

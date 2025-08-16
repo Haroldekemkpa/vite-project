@@ -13,7 +13,9 @@ export const CommentProvider = ({ children }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/comments`);
+      const response = await fetch(
+        ` https://server-5-oy95.onrender.com/api/comments`
+      );
 
       if (!response.ok) {
         throw new Error(`Error fetching comments: ${response.status}`);

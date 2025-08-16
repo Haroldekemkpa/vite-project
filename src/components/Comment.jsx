@@ -57,10 +57,13 @@ const Comment = () => {
         formData.append("file", selectedFile);
       }
 
-      const res = await fetch("http://localhost:3000/api/comments/create", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        " https://server-5-oy95.onrender.com/api/comments/create",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await res.json();
 

@@ -43,11 +43,14 @@ const HireSection = () => {
     setIsSubmittingHire(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/hires/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(hireFormData),
-      });
+      const res = await fetch(
+        " https://server-5-oy95.onrender.com/api/hires/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(hireFormData),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {
