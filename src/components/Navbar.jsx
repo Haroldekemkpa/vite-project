@@ -93,35 +93,30 @@ const Navbar = () => {
         {isOpen && (
           <div className="absolute z-40 flex-col items-center justify-center space-y-6 top-20 left-0 bg-[#111827] px-4 py-8 w-full transition-all duration-300 ease-in-out">
             <ul className="flex-col space-y-6 uppercase text-white text-center items-center ">
-              <li
-                onClick={handleIsOpen}
-                className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out"
-              >
-                <a href="#home">HOME</a>
+              <li className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out">
+                <a onClick={handleIsOpen} href="#home">
+                  HOME
+                </a>
               </li>
-              <li
-                onClick={handleIsOpen}
-                className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out"
-              >
-                <a href="#about">ABOUT</a>
+              <li className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out">
+                <a onClick={handleIsOpen} href="#about">
+                  ABOUT
+                </a>
               </li>
-              <li
-                onClick={handleIsOpen}
-                className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out"
-              >
-                <a href="#resume">RESUME</a>
+              <li className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out">
+                <a onClick={handleIsOpen} href="#resume">
+                  RESUME
+                </a>
               </li>
-              <li
-                onClick={handleIsOpen}
-                className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out"
-              >
-                <a href="#testimonial">TESTIMONIAL</a>
+              <li className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out">
+                <a onClick={handleIsOpen} href="#testimonial">
+                  TESTIMONIAL
+                </a>
               </li>
-              <li
-                onClick={handleIsOpen}
-                className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out"
-              >
-                <a href="#testimonial">Hire me</a>
+              <li className="hover:text-orange-600 hover:border-b-2 border-orange-600 hover:pb-4 transition-all duration-300 ease-in-out">
+                <a onClick={handleIsOpen} href="#testimonial">
+                  Hire me
+                </a>
               </li>
             </ul>
 
