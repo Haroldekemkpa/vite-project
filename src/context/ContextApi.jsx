@@ -22,7 +22,7 @@ export const CommentProvider = ({ children }) => {
       }
 
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
 
       setComments(result.testimonials);
     } catch (error) {
