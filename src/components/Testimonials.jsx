@@ -49,7 +49,7 @@ const TestimonialCarousel = () => {
         {comments.length > 0 &&
           comments.map((cur, index) => (
             <div key={index} className="px-4 h-full">
-              <div className="bg-white h-full min-h-[320px] flex flex-col justify-between shadow-lg p-6 rounded-2xl text-center">
+              <div className="bg-white h-full min-h-[320px] flex flex-row justify-between shadow-lg p-6 rounded-2xl text-center">
                 <div>
                   <img
                     src={
