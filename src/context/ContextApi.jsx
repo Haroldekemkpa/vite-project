@@ -28,7 +28,12 @@ export const CommentProvider = ({ children }) => {
 
       const uniqueTestimonials = result.testimonials.filter(
         (v, i, a) =>
-          a.findIndex((t) => t.comment === v.comment && t.name === v.name) === i
+          a.findIndex(
+            (t) =>
+              t.comment === v.comment &&
+              t.name === v.name &&
+              t.profile_img === v.profile_img
+          ) === i
       );
 
       setComments(uniqueTestimonials);
@@ -36,6 +41,12 @@ export const CommentProvider = ({ children }) => {
       setError(error.message);
     }
   };
+
+  useEffect(() => {
+    console.log("Raw API response:", result);
+    console.log("Filtered testimonials:", uniqueTestimonials);
+    setComments(uniqueTestimonials);
+  }, [refresh]);
 
   useEffect(() => {
     fetchComments();
