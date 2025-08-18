@@ -35,7 +35,7 @@ export const CommentProvider = ({ children }) => {
         throw new Error("Invalid API response structure");
       }
 
-      console.log("API testimonials:", testimonials);
+      // console.log("API testimonials:", testimonials);
 
       // More robust duplicate removal using id if available
       const uniqueTestimonials = testimonials.reduce((acc, current) => {
@@ -47,7 +47,7 @@ export const CommentProvider = ({ children }) => {
         return exists ? acc : [...acc, current];
       }, []);
 
-      console.log("Unique testimonials:", uniqueTestimonials);
+      // console.log("Unique testimonials:", uniqueTestimonials);
       setComments(uniqueTestimonials);
     } catch (error) {
       console.error("Fetch error:", error);
