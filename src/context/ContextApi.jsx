@@ -1,66 +1,86 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { createContext, useState, useEffect } from "react";
 
-// create context
 export const CommentContextAPI = createContext();
 
-// Create provider component
 export const CommentProvider = ({ children }) => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchComments = async () => {
+  // Memoize fetch function to prevent unnecessary recreations
+  const fetchComments = useCallback(async () => {
     setIsLoading(true);
+    setError(null); // Clear previous errors
+
     try {
       const response = await fetch(
-        `https://server-5-oy95.onrender.com/api/comments`
+        `https://server-5-oy95.onrender.com/api/comments`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // You could add AbortController here for cleanup
+        }
       );
 
       if (!response.ok) {
-        throw new Error(`Error fetching comments: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
-      console.log("Raw API response:", result);
+      const { success, testimonials } = await response.json();
 
-      // remove duplicates
-      const uniqueTestimonials = result.testimonials.filter(
-        (v, i, a) =>
-          a.findIndex(
-            (t) =>
-              t.comment === v.comment &&
-              t.name === v.name &&
-              t.profile_img === v.profile_img
-          ) === i
-      );
+      if (!success || !Array.isArray(testimonials)) {
+        throw new Error("Invalid API response structure");
+      }
 
-      console.log("Filtered testimonials:", uniqueTestimonials);
+      console.log("API testimonials:", testimonials);
+
+      // More robust duplicate removal using id if available
+      const uniqueTestimonials = testimonials.reduce((acc, current) => {
+        const exists = acc.some(
+          (item) =>
+            item.id === current.id || // First try matching by ID
+            (item.name === current.name && item.comment === current.comment) // Fallback to name+comment
+        );
+        return exists ? acc : [...acc, current];
+      }, []);
+
+      console.log("Unique testimonials:", uniqueTestimonials);
       setComments(uniqueTestimonials);
-      setError(null);
     } catch (error) {
       console.error("Fetch error:", error);
       setError(error.message);
-      setComments([]);
+      // Keep existing comments if we have them, rather than resetting
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []); // Empty dependency array means this is created once
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     fetchComments();
-  }, [refresh]);
+
+    return () => {
+      abortController.abort(); // Cleanup on unmount
+    };
+  }, [fetchComments, refresh]);
+
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = React.useMemo(
+    () => ({
+      comments,
+      error,
+      isLoading,
+      refreshComments: () => setRefresh((prev) => !prev),
+    }),
+    [comments, error, isLoading]
+  );
 
   return (
-    <CommentContextAPI.Provider
-      value={{
-        comments,
-        error,
-        isLoading,
-        refreshComments: () => setRefresh((prev) => !prev),
-      }}
-    >
+    <CommentContextAPI.Provider value={contextValue}>
       {children}
     </CommentContextAPI.Provider>
   );
