@@ -4,17 +4,18 @@ import { createContext, useState, useEffect } from "react";
 // create context
 export const CommentContextAPI = createContext();
 
-//  Create provider component
-
+// Create provider component
 export const CommentProvider = ({ children }) => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchComments = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
-        ` https://server-5-oy95.onrender.com/api/comments`
+        `https://server-5-oy95.onrender.com/api/comments`
       );
 
       if (!response.ok) {
@@ -22,10 +23,9 @@ export const CommentProvider = ({ children }) => {
       }
 
       const result = await response.json();
-      // console.log(result);
+      console.log("Raw API response:", result);
 
       // remove duplicates
-
       const uniqueTestimonials = result.testimonials.filter(
         (v, i, a) =>
           a.findIndex(
@@ -36,17 +36,17 @@ export const CommentProvider = ({ children }) => {
           ) === i
       );
 
+      console.log("Filtered testimonials:", uniqueTestimonials);
       setComments(uniqueTestimonials);
+      setError(null);
     } catch (error) {
+      console.error("Fetch error:", error);
       setError(error.message);
+      setComments([]);
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    console.log("Raw API response:", result);
-    console.log("Filtered testimonials:", uniqueTestimonials);
-    setComments(uniqueTestimonials);
-  }, [refresh]);
 
   useEffect(() => {
     fetchComments();
@@ -57,6 +57,7 @@ export const CommentProvider = ({ children }) => {
       value={{
         comments,
         error,
+        isLoading,
         refreshComments: () => setRefresh((prev) => !prev),
       }}
     >
