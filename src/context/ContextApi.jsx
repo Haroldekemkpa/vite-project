@@ -24,7 +24,14 @@ export const CommentProvider = ({ children }) => {
       const result = await response.json();
       // console.log(result);
 
-      setComments(result.testimonials);
+      // remove duplicates
+
+      const uniqueTestimonials = result.testimonials.filter(
+        (v, i, a) =>
+          a.findIndex((t) => t.comment === v.comment && t.name === v.name) === i
+      );
+
+      setComments(uniqueTestimonials);
     } catch (error) {
       setError(error.message);
     }
