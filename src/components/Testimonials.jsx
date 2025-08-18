@@ -165,11 +165,7 @@ const TestimonialCarousel = () => {
               <div className="bg-white h-full min-h-[320px] flex flex-col justify-between shadow-lg p-6 rounded-2xl text-center">
                 <div>
                   <img
-                    src={
-                      cur.profile_img
-                        ? `https://server-5-oy95.onrender.com/uploads/${cur.profile_img}`
-                        : `${assets.img}`
-                    }
+                    src={cur.profile_img ? cur.profile_img : assets.img}
                     alt={cur.name}
                     className="w-20 h-20 mx-auto rounded-full border-4 border-orange-400 object-cover mb-4"
                   />

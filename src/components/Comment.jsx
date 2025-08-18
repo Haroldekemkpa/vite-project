@@ -54,11 +54,11 @@ const Comment = () => {
       formData.append("comment", commentFormData.comment);
 
       if (selectedFile) {
-        formData.append("file", selectedFile);
+        formData.append("profile_img", selectedFile);
       }
 
       const res = await fetch(
-        " https://server-5-oy95.onrender.com/api/comments/create",
+        "https://server-5-oy95.onrender.com/api/comments/create",
         {
           method: "POST",
           body: formData,
